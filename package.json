@@ -8,5 +8,18 @@
   },
   "dependencies": {
     "mongodb": "^4.4.1"
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chris-Pyy/dbii-4522-asn2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chris-Pyy/dbii-4522-asn2/issues"
+  },
+  "homepage": "https://github.com/Chris-Pyy/dbii-4522-asn2#readme"
 }
