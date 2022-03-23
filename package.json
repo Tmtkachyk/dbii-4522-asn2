@@ -1,0 +1,19 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "[Heroku link](https://comp4522-a2.herokuapp.com/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chris-Pyy/dbii-4522-asn2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chris-Pyy/dbii-4522-asn2/issues"
+  },
+  "homepage": "https://github.com/Chris-Pyy/dbii-4522-asn2#readme"
+}
