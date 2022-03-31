@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
-    "mongodb": "^4.4.1"
+    "mongodb": "^4.4.1",
+    "tedious": "^14.4.0"
   }
 }
