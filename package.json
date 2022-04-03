@@ -7,7 +7,10 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
+    "@azure/cosmos": "^3.15.1",
     "axios": "^0.26.1",
-    "mongodb": "^4.4.1"
+    "mongodb": "^4.4.1",
+    "prisma": "^3.11.1",
+    "tedious": "^14.4.0"
   }
 }

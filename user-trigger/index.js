@@ -1,120 +1,75 @@
 const { Connection, Request } = require("tedious");
 
-module.exports = async function (context, req) {
+module.exports = function (context, req) {
+    context.log('JavaScript HTTP trigger function processed a request.');
 
     // Create connection to database
     const config = {
-    authentication: {
-        options: {
-        userName: "comp4522",
-        password: "login2022!"
+        authentication: {
+            options: {
+            userName: "comp4522",
+            password: "login2022!"
+            },
+            type: "default"
         },
-        type: "default"
-    },
-    server: "project2database.database.windows.net",
-    options: {
-        database: "Users",
-        encrypt: true,
-        rowCollectionOnRequestCompletion: true
-    }
+        server: "project2database.database.windows.net",
+        options: {
+            database: "Users",
+            encrypt: true,
+            rowCollectionOnRequestCompletion: true
+        }
     };
 
     const connection = new Connection(config);
 
-    // Attempt to connect and execute queries if connection goes through
-    connection.on("connect", err => {
-    if (err) {
-        console.error(err.message);
-    } else {
-        queryDatabase().then(result => {
-            console.log(result);
-        }).catch(error => {
-            console.log("error")
-        });
-    }
-    });
-
-    connection.connect();
-
-    function queryDatabase() {
-    console.log("Reading rows from the Table...");
+    let result = [];
 
     // Read all rows from table
     const request = new Request(
-        `SELECT TOP (1) [user_id]
+        `SELECT TOP (1) [id]
+        ,[user_id]
+        ,[display_name]
+        ,[about_me]
+        ,[age]
+        ,[creation_date]
+        ,[last_access_date]
+        ,[location]
+        ,[reputation]
+        ,[up_votes]
+        ,[down_votes]
+        ,[views]
         ,[profile_image_url]
         ,[website_url]
-    FROM [dbo].[user_urls]`,
+      FROM [dbo].[user_data] WHERE [user_id] = ${req.query.userid}`,
         (err, rowCount) => {
         if (err) {
             console.error(err.message);
         } else {
             console.log(`${rowCount} row(s) returned`);
+            console.log(result);
+            context.res.headers = { "Content-Type": "application/json" };
+            context.res.body = {result};
+            context.done()
         }
+    });
+
+    // Attempt to connect and execute queries if connection goes through
+    connection.on("connect", err => {
+        if (err) {
+          console.error(err.message);
+        } else {
+          connection.execSql(request);
         }
-    );
+    });
 
-    // return new Promise((resolve, reject) => {
-    //     const result = [];
-  
-    //     request.on("row", (columns) => {
-    //       const entry = {};
-    //       columns.forEach((column) => {
-    //         entry[column.metadata.colName] = column.value;
-    //         // console.log("%s\t%s", column.metadata.colName, column.value);
-    //       });
-    //       result.push(entry);
-    //     //   console.log(result)
-    //     });
-
-    //     request.on('error',error=>reject(error));// some error happened, reject the promise
-    //     request.on('done',()=>resolve(result)); // resolve the promise with the result rows.
-    //     request.on('doneProc',()=>resolve(result)); // resolve the promise with the result rows.
-    //     request.on('doneInProc',()=>resolve(result)); // resolve the promise with the result rows.
-    //     request.on('requestCompleted', function() {
-    //         context.res.headers = { "Content-Type": "application/json" };
-    //         context.res.body = {
-    //             success: true,
-    //             message: "result"
-    //         };
-    //     });
-        
-    //     connection.execSql(request);
-    // });
-
-    const result = [];
-  
     request.on("row", (columns) => {
-      const entry = {};
-      columns.forEach((column) => {
+    const entry = {};
+    columns.forEach((column) => {
         entry[column.metadata.colName] = column.value;
-        // console.log("%s\t%s", column.metadata.colName, column.value);
-      });
-      result.push(entry);
-    //   console.log(result)
+    });
+    result.push(entry);
     });
 
-    request.on('requestCompleted', function() {
-        context.res = {
-            status: 200, /* Defaults to 200 */
-            body: {result},
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-        context.done
-    });
-    
-    connection.execSql(request);
-
-    
-    }
-
-    context.log('JavaScript HTTP trigger function processed a request.');
-
-    // context.res = {
-    //     body: "test this"
-    // }
-    // context.done()
+    connection.connect();
 
 }
