@@ -8,17 +8,38 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
-app.get('/', (req, res) => {
-    res.render('pages/index')
+app.get('/', async(req, res) => {
+
+    let home_obj = null
+
+    let page = req.query.page
+
+    if (page = "undefined") {
+        page = 1
+    }
+
+    user = await axios.get(`http://localhost:7071/api/home-trigger?page=${page}`).then(resp => {
+        home_obj = resp.data.dbResult
+    })
+
+    console.log(home_obj[0])
+
+    res.render('pages/index', {
+        home_obj
+    })
 })
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-app.get('/user', async(req, res) => {
+app.get('/user/:userid', async(req, res) => {
 
-    user = await axios.get("http://localhost:7071/api/user-trigger?userid=203416")
+    let user_obj = null
 
-    console.log(user)
+    user = await axios.get(`http://localhost:7071/api/user-trigger?userid=${req.params.userid}`).then(resp => {
+        user_obj = resp.data.result[0]
+    })
 
-    res.render('pages/user')
+    res.render('pages/user', {
+        user_obj
+    })
 })
