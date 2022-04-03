@@ -26,9 +26,7 @@ async function dbquery(page) {
 
         let collection = db.collection('posts');
 
-        // let query = { 'post_id': {$gt: parseInt(postid)} }
-
-        let result = await collection.find().sort({$natural: 1}).limit(5).toArray();
+        let result = await collection.find().sort({$natural: 1}).skip((parseInt(page)*5)-5).limit(5).toArray();
 
         return result;
 
