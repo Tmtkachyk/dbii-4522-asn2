@@ -43,3 +43,25 @@ app.get('/user/:userid', async(req, res) => {
         user_obj
     })
 })
+
+app.get('/post', async(req, res) => {
+
+    let home_obj = null
+
+    let page = req.query.page
+
+    if (page = "undefined") {
+        page = 1
+    }
+
+    user = await axios.get(`http://localhost:7071/api/home-trigger?page=${page}`).then(resp => {
+   
+        home_obj = resp.data.dbResult
+    })
+
+ console.log(home_obj)
+
+    res.render('pages/post', {
+        home_obj
+    })
+})

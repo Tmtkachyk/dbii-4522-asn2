@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="overflow-x-hidden bg-gray-100">
+        <nav class="px-6 py-4 bg-white shadow">
+            <div class="container flex flex-col mx-auto md:flex-row md:items-center md:justify-between">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <a href="#" class="text-xl font-bold text-gray-800 md:text-2xl">Brand</a>
+                    </div>
+                    <div>
+                        <button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden">
+                            <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
+                                <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex-col hidden md:flex md:flex-row md:-mx-4">
+                    <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">Home</a>
+                    <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">Blog</a>
+                    <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">About us</a>
+                </div>
+            </div>
+        </nav>
+    
+        <div class="px-6 py-8">
+            <div class="container flex justify-between mx-auto ">
+                <div class="w-full lg:w-10/12">
+
+                    <div class="mt-6 ">
+                        <div class="max-w-4xl px-10 py-6 mx-auto rounded-lg bg-white shadow ">
+
+                            <div class="flex items-center justify-between"><span class="font-light text-gray-600">Posted: <%- home_obj[1].creation_date %> </span><a href="#"
+                                    class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500"><%- home_obj[1].tags %></a>
+                            </div>
+ 
+    
+                            <div class="mt-2"><a href="#" class="text-2xl font-bold text-gray-700 hover:underline"><%= home_obj[1].title %></a>
+                                <p></p>
+
+                                <div class="flex items-center justify-between"><span class="font-light text-gray-600">Views: <%- home_obj[1].view_count %> </span>
+                                <span class="font-light text-gray-600">Score: <%- home_obj[1].score %> </span>
+                            </div>
+
+                                <p class="mt-2 text-gray-600"><%- home_obj[1].body %></p>
+                            </div>
+     
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+        <div class="px-6 py-8">
+            <div class="container flex justify-between mx-auto ">
+                <div class="w-full lg:w-10/12">
+                    <div class="flex items-center justify-between mb-2 ">
+                        <h1 class="text-2xl font-bold text-gray-700 md:text-2xl">Answers </h1>
+                        
+                    </div>
+                    <div class="flex items-center justify-between ml-6 ">
+                        <h2 class="text-xl font-bold text-gray-700 md:text-xl">Comment Score:</h2>
+                        
+                    </div>
+                    <div class="mt-6 ">
+                        <div class="max-w-4xl px-10 py-6 mx-auto rounded-lg bg-white shadow">
+                            <div class="flex items-center justify-between"><span class="font-light text-gray-600">Comment Response: </span><a href="#"
+                                    class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500">Comment User:</a>
+                            </div>
+ 
+                            <div class="mt-2">
+                                
+                                <p class="mt-2 text-gray-600">Comment body:</p>
+                            </div>
+     
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+        <footer class="px-6 py-2 text-gray-100 bg-gray-800 mt-2">
+            <div class="container flex flex-col items-center justify-between mx-auto md:flex-row"><a href="#"
+                    class="text-2xl font-bold">Brand</a>
+                <p class="mt-2 md:mt-0">All rights reserved 2020.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
