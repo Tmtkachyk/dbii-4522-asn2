@@ -13,7 +13,7 @@
             <div class="container flex flex-col mx-auto md:flex-row md:items-center md:justify-between">
                 <div class="flex items-center justify-between">
                     <div>
-                        <a href="#" class="text-xl font-bold text-gray-800 md:text-2xl">Brand</a>
+                        <a href="/" class="text-xl font-bold text-gray-800 md:text-2xl">Brand</a>
                     </div>
                     <div>
                         <button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden">
@@ -25,9 +25,9 @@
                     </div>
                 </div>
                 <div class="flex-col hidden md:flex md:flex-row md:-mx-4">
-                    <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">Home</a>
-                    <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">Blog</a>
-                    <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">About us</a>
+                    <a href="/" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">Home</a>
+                    <a href="/" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">Blog</a>
+                    <a href="/" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">About us</a>
                 </div>
             </div>
         </nav>
@@ -39,20 +39,27 @@
                     <div class="mt-6 ">
                         <div class="max-w-4xl px-10 py-6 mx-auto rounded-lg bg-white shadow ">
 
-                            <div class="flex items-center justify-between"><span class="font-light text-gray-600">Posted: <%- home_obj[1].creation_date %> </span><a href="#"
-                                    class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500"><%- home_obj[1].tags %></a>
+                            <div class="flex items-center justify-between"><span class="font-light text-gray-600">Posted: <%= data.post_obj.creation_date %> </span><a href=""
+                                    class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500"><%= data.post_obj.tags %></a>
                             </div>
- 
-    
-                            <div class="mt-2"><a href="#" class="text-2xl font-bold text-gray-700 hover:underline"><%= home_obj[1].title %></a>
+                            <div class="overflow-x-hidden mt-2"><a href="" class="text-2xl font-bold text-gray-700 hover:underline"><%= data.post_obj.title %></a>
                                 <p></p>
 
-                                <div class="flex items-center justify-between"><span class="font-light text-gray-600">Views: <%- home_obj[1].view_count %> </span>
-                                <span class="font-light text-gray-600">Score: <%- home_obj[1].score %> </span>
+                                <div class="flex items-center justify-between"><span class="font-light text-gray-600">Views: <%= data.post_obj.view_count %> </span>
+                                <span class="font-light text-gray-600">Score: <%= data.post_obj.score %> </span>
                             </div>
-
-                                <p class="mt-2 text-gray-600"><%- home_obj[1].body %></p>
+                                <p class="mt-2 text-gray-600"><%- data.post_obj.body %></p>
                             </div>
+                            <div><a href="/user/<%= data.post_obj.owner_user_id %>" class="flex items-center justify-end">
+                                <img
+                                        src=<% if (!data.post_obj.profile_image_url) { %>
+                                            "/default-avatar.png"
+                                            <%} else { %> 
+                                                <%= data.post_obj.profile_image_url %>
+                                                <% } %>
+                                        alt="avatar" class="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block">
+                                    <h1 class="font-bold text-gray-700 hover:underline"><%= data.post_obj.display_name %></h1>
+                                </a></div>
      
                         </div>
                     </div>
@@ -64,32 +71,43 @@
             <div class="container flex justify-between mx-auto ">
                 <div class="w-full lg:w-10/12">
                     <div class="flex items-center justify-between mb-2 ">
-                        <h1 class="text-2xl font-bold text-gray-700 md:text-2xl">Answers </h1>
+                        <h1 class="text-2xl font-bold text-gray-700 md:text-2xl">Answers</h1>
                         
                     </div>
                     <div class="flex items-center justify-between ml-6 ">
-                        <h2 class="text-xl font-bold text-gray-700 md:text-xl">Comment Score:</h2>
-                        
+                        <h2 class="text-xl font-light text-gray-700 md:text-xl">Comment Count: <%= data.post_obj.comment_count %></h2>
+                    
                     </div>
+                    <% for(var i=0; i < data.comments_obj.length; i++) { %>
                     <div class="mt-6 ">
                         <div class="max-w-4xl px-10 py-6 mx-auto rounded-lg bg-white shadow">
-                            <div class="flex items-center justify-between"><span class="font-light text-gray-600">Comment Response: </span><a href="#"
-                                    class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500">Comment User:</a>
+                            <div class="flex items-center justify-between"><span class="font-light text-gray-600"><%= data.comments_obj[i].creation_date %></span>
                             </div>
  
                             <div class="mt-2">
                                 
-                                <p class="mt-2 text-gray-600">Comment body:</p>
+                                <p class="mt-2 text-gray-600"><%= data.comments_obj[i].text %></p>
                             </div>
-     
+                            <div><a href="/user/<%= data.post_obj.owner_user_id %>" class="flex items-center justify-end">
+                                <img
+                                        src=<% if (!data.comments_obj.profile_image_url) { %>
+                                            "/default-avatar.png"
+                                            <%} else { %> 
+                                                <%= data.comments_obj[i].profile_image_url %>
+                                                <% } %>
+                                        alt="avatar" class="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block">
+                                    <h1 class="font-bold text-gray-700 hover:underline"><%= data.comments_obj[i].display_name %></h1>
+                                </a></div>
                         </div>
                     </div>
+                    <% } %>
+
             </div>
         </div>
 
 
         <footer class="px-6 py-2 text-gray-100 bg-gray-800 mt-2">
-            <div class="container flex flex-col items-center justify-between mx-auto md:flex-row"><a href="#"
+            <div class="container flex flex-col items-center justify-between mx-auto md:flex-row"><a href="/"
                     class="text-2xl font-bold">Brand</a>
                 <p class="mt-2 md:mt-0">All rights reserved 2020.</p>
             </div>

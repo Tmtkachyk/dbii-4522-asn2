@@ -14,7 +14,7 @@ app.get('/', async(req, res) => {
 
     let page = req.query.page
 
-    if (page = "undefined") {
+    if (!req.query.page) {
         page = 1
     }
 
@@ -22,10 +22,11 @@ app.get('/', async(req, res) => {
         home_obj = resp.data.dbResult
     })
 
-    console.log(home_obj[0])
-
     res.render('pages/index', {
-        home_obj
+        data: {
+            "page": page,
+            "home_obj": home_obj
+        }
     })
 })
 
@@ -44,24 +45,23 @@ app.get('/user/:userid', async(req, res) => {
     })
 })
 
-app.get('/post', async(req, res) => {
+app.get('/post/:postid', async(req, res) => {
 
-    let home_obj = null
+    let post_obj = null
+    let comments_obj = null
 
-    let page = req.query.page
-
-    if (page = "undefined") {
-        page = 1
-    }
-
-    user = await axios.get(`http://localhost:7071/api/home-trigger?page=${page}`).then(resp => {
-   
-        home_obj = resp.data.dbResult
+    post = await axios.get(`http://localhost:7071/api/post-trigger?postid=${req.params.postid}`).then(resp => {
+        post_obj = resp.data.message
     })
 
- console.log(home_obj)
+    comments = await axios.get(`http://localhost:7071/api/comments-trigger?postid=${req.params.postid}`).then(resp => {
+        comments_obj = resp.data.dbResult
+    })
 
     res.render('pages/post', {
-        home_obj
+        data: {
+            "post_obj": post_obj,
+            "comments_obj": comments_obj
+        }
     })
 })
