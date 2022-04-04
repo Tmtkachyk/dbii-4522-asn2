@@ -8,6 +8,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
+app.use(express.json());
+app.use(express.urlencoded());
+
 app.get('/', async(req, res) => {
 
     let home_obj = null
@@ -64,4 +67,24 @@ app.get('/post/:postid', async(req, res) => {
             "comments_obj": comments_obj
         }
     })
+})
+
+app.post('/post/:postid', async(req, res) => {
+
+    if (req.body.text) {
+        comment = await axios.post(`http://localhost:7071/api/comments-trigger`, 
+            {
+                "text": req.body.text,  
+                "post_id": req.params.postid,
+                "user_id": 99999999
+            }
+        )
+    
+        res.redirect(`/post/${req.params.postid}`)
+    } else if (req.body.deletecomment) {
+        comment = await axios.post(`http://localhost:7071/api/comments-trigger?deletecomment=${req.body.deletecomment}`)
+        
+        res.redirect(`/post/${req.params.postid}`)
+    }
+    
 })
