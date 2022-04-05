@@ -64,6 +64,7 @@ app.get('/post/:postid', async(req, res) => {
     res.render('pages/post', {
         data: {
             "editpost": req.query.post,
+            "editcomment": req.query.editcomment,
             "post_obj": post_obj,
             "comments_obj": comments_obj
         }
