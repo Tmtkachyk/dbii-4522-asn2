@@ -21,7 +21,7 @@ app.get('/', async(req, res) => {
         page = 1
     }
 
-    user = await axios.get(`http://localhost:7071/api/home-trigger?page=${page}`).then(resp => {
+    user = await axios.get(`https://blog-functions.azurewebsites.net/api/home-trigger?page=${page}`).then(resp => {
         home_obj = resp.data.dbResult
     })
 
@@ -39,7 +39,7 @@ app.get('/user/:userid', async(req, res) => {
 
     let user_obj = null
 
-    user = await axios.get(`http://localhost:7071/api/user-trigger?userid=${req.params.userid}`).then(resp => {
+    user = await axios.get(`https://blog-functions.azurewebsites.net/api/user-trigger?userid=${req.params.userid}`).then(resp => {
         user_obj = resp.data.result[0]
     })
 
@@ -53,11 +53,11 @@ app.get('/post/:postid', async(req, res) => {
     let post_obj = null
     let comments_obj = null
 
-    post = await axios.get(`http://localhost:7071/api/post-trigger?postid=${req.params.postid}`).then(resp => {
+    post = await axios.get(`https://blog-functions.azurewebsites.net/api/post-trigger?postid=${req.params.postid}`).then(resp => {
         post_obj = resp.data.message
     })
 
-    comments = await axios.get(`http://localhost:7071/api/comments-trigger?postid=${req.params.postid}`).then(resp => {
+    comments = await axios.get(`https://blog-functions.azurewebsites.net/api/comments-trigger?postid=${req.params.postid}`).then(resp => {
         comments_obj = resp.data.dbResult
     })
 
@@ -72,7 +72,7 @@ app.get('/post/:postid', async(req, res) => {
 app.post('/post/:postid', async(req, res) => {
 
     if (req.body.text) {
-        comment = await axios.post(`http://localhost:7071/api/comments-trigger`, 
+        comment = await axios.post(`https://blog-functions.azurewebsites.net/api/comments-trigger`, 
             {
                 "text": req.body.text,  
                 "post_id": req.params.postid,
@@ -82,7 +82,7 @@ app.post('/post/:postid', async(req, res) => {
     
         res.redirect(`/post/${req.params.postid}`)
     } else if (req.body.deletecomment) {
-        comment = await axios.post(`http://localhost:7071/api/comments-trigger?deletecomment=${req.body.deletecomment}`)
+        comment = await axios.post(`https://blog-functions.azurewebsites.net/api/comments-trigger?deletecomment=${req.body.deletecomment}`)
         
         res.redirect(`/post/${req.params.postid}`)
     }
