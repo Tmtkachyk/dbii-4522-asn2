@@ -54,7 +54,7 @@ app.get('/post/:postid', async(req, res) => {
     let comments_obj = null
 
     post = await axios.get(`https://blog-functions.azurewebsites.net/api/post-trigger?postid=${req.params.postid}`).then(resp => {
-        post_obj = resp.data.message
+        post_obj = resp.data.dbResult
     })
 
     comments = await axios.get(`https://blog-functions.azurewebsites.net/api/comments-trigger?postid=${req.params.postid}`).then(resp => {
@@ -63,6 +63,7 @@ app.get('/post/:postid', async(req, res) => {
 
     res.render('pages/post', {
         data: {
+            "editpost": req.query.post,
             "post_obj": post_obj,
             "comments_obj": comments_obj
         }
@@ -71,8 +72,23 @@ app.get('/post/:postid', async(req, res) => {
 
 app.post('/post/:postid', async(req, res) => {
 
+    if (req.body.title && req.body.body) {
+        post = await axios.post(`https://blog-functions.azurewebsites.net/api/post-trigger?post=edit&postid=${req.params.postid}`, 
+        {
+            "title": req.body.title,
+            "body": req.body.body
+        })
+        
+        res.redirect(`/post/${req.params.postid}`)
+    } else if (req.body.deletepost) {
+
+        post = await axios.post(`https://blog-functions.azurewebsites.net/api/post-trigger?post=delete&postid=${req.body.deletepost}`)
+        
+        res.redirect('/')
+    }
+
     if (req.body.text) {
-        comment = await axios.post(`https://blog-functions.azurewebsites.net/api/comments-trigger`, 
+        comment = await axios.post(`https://blog-functions.azurewebsites.net/api/comments-trigger?comment=add`, 
             {
                 "text": req.body.text,  
                 "post_id": req.params.postid,
@@ -82,9 +98,41 @@ app.post('/post/:postid', async(req, res) => {
     
         res.redirect(`/post/${req.params.postid}`)
     } else if (req.body.deletecomment) {
-        comment = await axios.post(`https://blog-functions.azurewebsites.net/api/comments-trigger?deletecomment=${req.body.deletecomment}`)
+        comment = await axios.post(`https://blog-functions.azurewebsites.net/api/comments-trigger?comment=delete&commentid=${req.body.deletecomment}`)
         
+        res.redirect(`/post/${req.params.postid}`)
+    } else if (req.body.editcomment) {
+        comment = await axios.post(`https://blog-functions.azurewebsites.net/api/comments-trigger?comment=edit&commentid=${req.query.editcomment}`, 
+            {
+                "text": req.body.editcomment
+            }
+        )
+    
         res.redirect(`/post/${req.params.postid}`)
     }
     
+})
+
+app.get('/createpost', async(req, res) => {
+
+    res.render('pages/createpost', {
+        data: {
+        }
+    })
+
+})
+
+app.post('/createpost', async(req, res) => {
+
+    if (req.body.body && req.body.title) {
+        post = await axios.post(`https://blog-functions.azurewebsites.net/api/post-trigger?post=add`, 
+            {
+                "body": req.body.body,
+                "title": req.body.title,
+            }
+        )
+    
+        res.redirect('/')
+    }
+
 })

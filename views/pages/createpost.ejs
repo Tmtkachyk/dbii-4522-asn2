@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="overflow-x-hidden bg-gray-100">
+        <nav class="px-6 py-4 bg-white shadow">
+            <div class="container flex flex-col mx-auto md:flex-row md:items-center md:justify-between">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <a href="/" class="text-xl font-bold text-gray-800 md:text-2xl">^comp_4522</a>
+                    </div>
+                    <div>
+                        <button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden">
+                            <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
+                                <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex-col hidden md:flex md:flex-row md:-mx-4">
+                    <a href="/" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">Home</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="mt-6 ">
+            <div class="max-w-4xl px-10 py-6 mx-auto rounded-lg bg-white shadow">
+                <div class="mt-2">
+                </div>
+                <div class="flex">
+                    <img
+                            src="/default-avatar.png"
+                            alt="avatar" class="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block">
+                        <h1 class="font-bold text-gray-700 hover:underline">Anonymous</h1>
+                    </div>
+                    <form class="flex flex-col py-2 items-start" action="" method="post">
+                        <h1 class="text-2xl font-bold text-gray-700 md:text-2xl">Title</h1>
+                        <input class="shadow appearance-none border rounded h-10 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="title" id="title">
+                        <h1 class="text-2xl font-bold text-gray-700 md:text-2xl">Body</h1>
+                        <input class="shadow appearance-none border rounded h-96 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="body" id="body">
+                        <button type="submit" class="px-2 py-1 w-20 h-10 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500">
+                            post
+                        </button>
+                    </form>
+            </div>
+        </div>
+
+        <footer class="px-6 py-2 text-gray-100 bg-gray-800 mt-2">
+            <div class="container flex flex-col items-center justify-between mx-auto md:flex-row"><a href="/"
+                    class="text-2xl font-bold">^comp_4522</a>
+                <p class="mt-2 md:mt-0">All rights reserved 2020.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

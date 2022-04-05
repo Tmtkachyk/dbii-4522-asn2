@@ -13,7 +13,7 @@
             <div class="container flex flex-col mx-auto md:flex-row md:items-center md:justify-between">
                 <div class="flex items-center justify-between">
                     <div>
-                        <a href="/" class="text-xl font-bold text-gray-800 md:text-2xl">Brand</a>
+                        <a href="/" class="text-xl font-bold text-gray-800 md:text-2xl">^comp_4522</a>
                     </div>
                     <div>
                         <button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden">
@@ -26,26 +26,23 @@
                 </div>
                 <div class="flex-col hidden md:flex md:flex-row md:-mx-4">
                     <a href="/" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">Home</a>
-                    <a href="/" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">Blog</a>
-                    <a href="/" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">About us</a>
                 </div>
             </div>
         </nav>
     
         <div class="px-6 py-8">
-            <div class="container flex justify-between mx-auto">
-                <div class="w-full lg:w-8/12">
-                    <div class="flex items-center justify-between">
+            <div class="container flex flex-col justify-center items-center mx-auto">
+                <div class="w-full lg:w-full">
+
+                    <div class="flex w-full justify-between">
                         <div class="flex flex-col">
                             <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Posts</h1>
                             <h1 class="text-md font-light font-bold text-gray-700 md:text-md">page: <%= data.page %></h1>
                         </div>
-                        <div>
-                            <select class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option>Latest</option>
-                                <option>Last Week</option>
-                            </select>
-                        </div>
+                        
+                          <a href="/createpost" class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg></a>
                     </div>
 
                     <!-- post -->
@@ -121,7 +118,7 @@
                     </div>
                 </div>
                 <!-- hidden  code taken out =  -->
-                <div class="hidden w-4/12 -mx-8 lg:block">
+                <!-- <div class="hidden w-4/12 -mx-8 lg:block">
                     <div class="px-8">
                         <h1 class="mb-4 text-xl font-bold text-gray-700">Authors</h1>
                         <div class="flex flex-col max-w-sm px-6 py-4 mx-auto bg-white rounded-lg shadow-md">
@@ -160,13 +157,13 @@
                                     class="text-sm font-light text-gray-600">Jun 1, 2020</span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
         <footer class="px-6 py-2 text-gray-100 bg-gray-800">
             <div class="container flex flex-col items-center justify-between mx-auto md:flex-row"><a href="/"
-                    class="text-2xl font-bold">Brand</a>
+                    class="text-2xl font-bold">^comp_4522</a>
                 <p class="mt-2 md:mt-0">All rights reserved 2022.</p>
                 <div class="flex mt-4 mb-2 -mx-2 md:mt-0 md:mb-0"><a href="/"
                         class="mx-2 text-gray-100 hover:text-gray-400"><svg viewBox="0 0 512 512"
